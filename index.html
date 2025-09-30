@@ -9,14 +9,126 @@
   <title>Frontend Mentor | Weather app</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="container">
+    <header class="page-header">
+      <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </header>
 
-  Units
+    <main class="main-content-wrapper">
+
+      <h1 class="header">How's the sky looking today?</h1>
+      <div class="search"></div>
+
+      <div class="grid-layout">
+        <div class="grid-layout__left-column">
+
+          <section class="weather-block">
+            <section class="weather-info"></section>
+            <ul class="key-metrics">
+              <li class="key-metrics__item">
+                <p class="key-metrics__label">Feels Like</p>
+                <p class="key-metrics__value">–</p>
+              </li>
+              <li class="key-metrics__item">
+                <p class="key-metrics__label">Humidity</p>
+                <p class="key-metrics__value">–</p>
+              </li>
+              <li class="key-metrics__item">
+                <p class="key-metrics__label">Wind</p>
+                <p class="key-metrics__value">–</p>
+              </li>
+              <li class="key-metrics__item">
+                <p class="key-metrics__label">Precipitation</p>
+                <p class="key-metrics__value">–</p>
+              </li>
+            </ul>
+          </section>
+
+          <section class="daily-forecast">
+            <header class="daily-forecast__header"></header>
+            <div class="daily-forecast__list">
+              <article class="daily-forecast__item">
+                <p class="daily-forecast__day"></p>
+                <img src="" alt="" class="daily-forecast__icon">
+                <p class="daily-forecast__temp-high"></p>
+                <p class="daily-forecast__temp-low"></p>
+              </article>
+
+              <article class="daily-forecast__item">
+                <p class="daily-forecast__day"></p>
+                <img src="" alt="" class="daily-forecast__icon">
+                <p class="daily-forecast__temp-high"></p>
+                <p class="daily-forecast__temp-low"></p>
+              </article>
+
+              <article class="daily-forecast__item">
+                <p class="daily-forecast__day"></p>
+                <img src="" alt="" class="daily-forecast__icon">
+                <p class="daily-forecast__temp-high"></p>
+                <p class="daily-forecast__temp-low"></p>
+              </article>
+
+              <article class="daily-forecast__item">
+                <p class="daily-forecast__day"></p>
+                <img src="" alt="" class="daily-forecast__icon">
+                <p class="daily-forecast__temp-high"></p>
+                <p class="daily-forecast__temp-low"></p>
+              </article>
+
+              <article class="daily-forecast__item">
+                <p class="daily-forecast__day"></p>
+                <img src="" alt="" class="daily-forecast__icon">
+                <p class="daily-forecast__temp-high"></p>
+                <p class="daily-forecast__temp-low"></p>
+              </article>
+
+              <article class="daily-forecast__item">
+                <p class="daily-forecast__day"></p>
+                <img src="" alt="" class="daily-forecast__icon">
+                <p class="daily-forecast__temp-high"></p>
+                <p class="daily-forecast__temp-low"></p>
+              </article>
+
+              <article class="daily-forecast__item">
+                <p class="daily-forecast__day"></p>
+                <img src="" alt="" class="daily-forecast__icon">
+                <p class="daily-forecast__temp-high"></p>
+                <p class="daily-forecast__temp-low"></p>
+              </article>
+            </div>
+          </section>
+        </div>
+
+        <aside class="grid-layout__right-column">
+          <section class="hourly-forecast">
+            <header class="hourly-forecast__header"></header>
+            <div class="hourly-forecast__list">
+              <article class="hourly-forecast__item">
+                <img src="" alt="" class="hourly-forecast__icon">
+                <p class="hourly-forecast__time"></p>
+                <p class="hourly-forecast__temp"></p>
+              </article>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+  <input id="city-autocomplete" type="text" placeholder="Enter a city or town">
+  
+  <!-- Units
 
   Switch to Imperial/Metric
 
@@ -41,26 +153,26 @@
   Search
 
   Feels like
-  <!-- Insert temperature here -->
+  Insert temperature here
 
   Humidity
-  <!-- Insert humidity here -->
+  Insert humidity here
 
   Wind
-  <!-- Insert wind here -->   
+  Insert wind here   
   
   Precipitation
-  <!-- Insert precipitation here -->
+  Insert precipitation here
 
   Daily forecast
-  <!-- Insert daily forecast for the next 7 days here -->
+  Insert daily forecast for the next 7 days here
 
   Hourly forecast
-  <!-- Insert hourly forecast for the selected day here -->
+  Insert hourly forecast for the selected day here -->
 
-  <div class="attribution">
+  <!-- <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
     Coded by <a href="#">Your Name Here</a>.
-  </div>
+  </div> -->
 </body>
 </html>

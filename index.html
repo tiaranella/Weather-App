@@ -12,88 +12,92 @@
 </head>
 <body>
   <div class="container">
-    <header class="page-header">
+    <header class="container__header">
       <img src="/assets/images/logo.svg" alt="Logo">
 
-      <div class="units-container">
-        <button id="unitsButton" class="units-button dropdown-trigger" data-target="unitsDropdown">
-          <img src="/assets/images/icon-units.svg" alt="dropdown" class="dropdown-arrow" width="16">
-          Units
-          <img src="/assets/images/icon-dropdown.svg" alt="dropdown" class="dropdown-arrow" width="16">
-        </button>
-        
-        <div id="unitsDropdown" class="dropdown-content hidden">
-          <button id="toggleUnitsButton" class="dropdown-content__button">Switch to Imperial</button>
-          <hr>
+      <div class="container__header-dropdown dropdown">
+      <button id="unitsButton" class="dropdown__trigger" data-target="unitsDropdown">
+        <img src="/assets/images/icon-units.svg" alt="dropdown" class="dropdown__arrow" width="16">
+        Units
+        <img src="/assets/images/icon-dropdown.svg" alt="dropdown" class="dropdown__arrow" width="16">
+      </button>
+      
+      <div id="unitsDropdown" class="dropdown__menu">
+        <button id="toggleUnitsButton" class="dropdown__action">Switch to Imperial</button>
+        <hr>
 
-          <section class="dropdown-content__item">
-            <p class="dropdown-content__item-label">Temperature</p>
-            <section class="dropdown-content__item-units">
-              <button class="dropdown-content__item-units-button" data-unit="temperature" data-value="celsius">
-                Celsius (°C)
-                <img src="assets/images/icon-checkmark.svg" alt="checkmark" class="checkmark">
-              </button>
-              <button class="dropdown-content__item-units-button" data-unit="temperature" data-value="fahrenheit">
-                Fahrenheit (°F)
-                <img src="assets/images/icon-checkmark.svg" alt="checkmark" class="checkmark">
-              </button>
-            </section>
+        <section class="dropdown__item">
+          <p class="dropdown__label">Temperature</p>
+          <section class="dropdown__group">
+            <button class="dropdown__option" data-unit="temperature" data-value="celsius">
+              Celsius (°C)
+              <img src="assets/images/icon-checkmark.svg" alt="checkmark" class="dropdown__checkmark">
+            </button>
+            <button class="dropdown__option" data-unit="temperature" data-value="fahrenheit">
+              Fahrenheit (°F)
+              <img src="assets/images/icon-checkmark.svg" alt="checkmark" class="dropdown__checkmark">
+            </button>
           </section>
+        </section>
 
-          <hr>
+        <hr>
 
-          <section class="dropdown-content__item">
-            <p class="dropdown-content__item-label">Wind Speed</p>
-            <section class="dropdown-content__item-units">
-              <button class="dropdown-content__item-units-button" data-unit="wind" data-value="kmh">
-                km/h
-                <img src="assets/images/icon-checkmark.svg" alt="checkmark" class="checkmark">
-              </button>
-              <button class="dropdown-content__item-units-button" data-unit="wind" data-value="mph">
-                mph
-                <img src="assets/images/icon-checkmark.svg" alt="checkmark" class="checkmark">
-              </button>
-            </section>
+        <section class="dropdown__item">
+          <p class="dropdown__label">Wind Speed</p>
+          <section class="dropdown__group">
+            <button class="dropdown__option" data-unit="wind" data-value="kmh">
+              km/h
+              <img src="assets/images/icon-checkmark.svg" alt="checkmark" class="dropdown__checkmark">
+            </button>
+            <button class="dropdown__option" data-unit="wind" data-value="mph">
+              mph
+              <img src="assets/images/icon-checkmark.svg" alt="checkmark" class="dropdown__checkmark">
+            </button>
           </section>
+        </section>
 
-          <hr>
+        <hr>
 
-          <section class="dropdown-content__item">
-            <p class="dropdown-content__item-label">Precipitation</p>
-            <section class="dropdown-content__item-units">
-              <button class="dropdown-content__item-units-button" data-unit="precipitation" data-value="mm">
-                Millimeters (mm)
-                <img src="assets/images/icon-checkmark.svg" alt="checkmark" class="checkmark">
-              </button>
-              <button class="dropdown-content__item-units-button" data-unit="precipitation" data-value="inch">
-                Inches (in)
-                <img src="assets/images/icon-checkmark.svg" alt="checkmark" class="checkmark">
-              </button>
-            </section>
+        <section class="dropdown__item">
+          <p class="dropdown__label">Precipitation</p>
+          <section class="dropdown__group">
+            <button class="dropdown__option" data-unit="precipitation" data-value="mm">
+              Millimeters (mm)
+              <img src="assets/images/icon-checkmark.svg" alt="checkmark" class="dropdown__checkmark">
+            </button>
+            <button class="dropdown__option" data-unit="precipitation" data-value="inch">
+              Inches (in)
+              <img src="assets/images/icon-checkmark.svg" alt="checkmark" class="dropdown__checkmark">
+            </button>
           </section>
-        </div>
+        </section>
+      </div>
       </div>
     </header>
 
-    <h1 class="header">How's the sky looking today?</h1>
+    <h1 class="app-title"><span class="app-title__text">How's the sky looking today?</span></h1>
 
     <main class="main-content-wrapper">
 
       <div class="search">
-        <div class="search__input">
-          <form id="searchForm">
-          <input type="search" id="search_query" name="query" placeholder="Search for a place..." autocomplete="off">
-          <div id="autocompleteResults" class="autocomplete-results hidden"></div>
-          </form>
+        <div class="search__content">
+            <div class="search__input">
+              <form id="searchForm" class="search__form">
+                <label for="search_query">
+                  <input type="search" id="search_query" name="query" placeholder="Search for a place..." autocomplete="off">
+                  <div id="autocompleteResults" class="search__results"></div>
+                </label>
+              </form>
+            </div>
+          <button type="submit" form="searchForm" class="search__button">Search</button>
         </div>
-        <button type="submit" form="searchForm" class="search__button">Search</button>
       </div>
 
       <div class="grid-layout">
         <div class="grid-layout__left-column">
 
-          <section class="weather-block">
-            <section class="weather-info">
+          <section class="weather">
+            <section class="weather__info">
 
             </section>
             <ul class="key-metrics__list">
@@ -125,68 +129,70 @@
           </section>
 
           <section class="daily-forecast">
-            <header class="daily-forecast__header">Daily forecast</header>
+            <header class="daily-forecast__header">
+            <span>Daily forecast</span>
+            </header>
             <div class="daily-forecast__list">
               <article class="daily-forecast__item">
                 <p class="daily-forecast__day"></p>
                 <img src="" alt="" class="daily-forecast__icon">
-                <section class="daily-forecast__temp">
-                  <p class="daily-forecast__temp-high"></p>
-                  <p class="daily-forecast__temp-low"></p>
+                <section class="daily-forecast__temps">
+                  <p class="daily-forecast__high"></p>
+                  <p class="daily-forecast__low"></p>
                 </section>
               </article>
 
               <article class="daily-forecast__item">
                 <p class="daily-forecast__day"></p>
                 <img src="" alt="" class="daily-forecast__icon">
-                <section class="daily-forecast__temp">
-                  <p class="daily-forecast__temp-high"></p>
-                  <p class="daily-forecast__temp-low"></p>
+                <section class="daily-forecast__temps">
+                  <p class="daily-forecast__high"></p>
+                  <p class="daily-forecast__low"></p>
                 </section>
               </article>
 
               <article class="daily-forecast__item">
                 <p class="daily-forecast__day"></p>
                 <img src="" alt="" class="daily-forecast__icon">
-                <section class="daily-forecast__temp">
-                  <p class="daily-forecast__temp-high daily-forecast__temp"></p>
-                  <p class="daily-forecast__temp-low daily-forecast__temp"></p>
+                <section class="daily-forecast__temps">
+                  <p class="daily-forecast__high"></p>
+                  <p class="daily-forecast__low"></p>
                 </section>
               </article>
 
               <article class="daily-forecast__item">
                 <p class="daily-forecast__day"></p>
                 <img src="" alt="" class="daily-forecast__icon">
-                <section class="daily-forecast__temp">
-                  <p class="daily-forecast__temp-high daily-forecast__temp"></p>
-                  <p class="daily-forecast__temp-low daily-forecast__temp"></p>
+                <section class="daily-forecast__temps">
+                  <p class="daily-forecast__high"></p>
+                  <p class="daily-forecast__low"></p>
                 </section>
               </article>
 
               <article class="daily-forecast__item">
                 <p class="daily-forecast__day"></p>
                 <img src="" alt="" class="daily-forecast__icon">
-                <section class="daily-forecast__temp">
-                  <p class="daily-forecast__temp-high daily-forecast__temp"></p>
-                  <p class="daily-forecast__temp-low daily-forecast__temp"></p>
+                <section class="daily-forecast__temps">
+                  <p class="daily-forecast__high"></p>
+                  <p class="daily-forecast__low"></p>
                 </section>
               </article>
 
               <article class="daily-forecast__item">
                 <p class="daily-forecast__day"></p>
                 <img src="" alt="" class="daily-forecast__icon">
-                <section class="daily-forecast__temp">
-                  <p class="daily-forecast__temp-high daily-forecast__temp"></p>
-                  <p class="daily-forecast__temp-low daily-forecast__temp"></p>
+                <section class="daily-forecast__temps">
+                  <p class="daily-forecast__high"></p>
+                  <p class="daily-forecast__low"></p>
                 </section>
               </article>
 
               <article class="daily-forecast__item">
                 <p class="daily-forecast__day"></p>
                 <img src="" alt="" class="daily-forecast__icon">
-                <section class="daily-forecast__temp">
-                  <p class="daily-forecast__temp-high daily-forecast__temp"></p>
-                  <p class="daily-forecast__temp-low daily-forecast__temp"></p>
+                <section class="daily-forecast__temps">
+                  <p class="daily-forecast__high"></p>
+                  <p class="daily-forecast__low"></p>
                 </section>
               </article>
             </div>
@@ -199,11 +205,11 @@
               <p class="hourly-forecast__header-label">Hourly forecast</p>  
 
               <div class="hourly-forecast__container">
-                <button id="daySelectorButton" class="dropdown-trigger hourly-forecast__dropdown-trigger" data-target="hourlyForecastDropdown">–
-                  <img src="/assets/images/icon-dropdown.svg" alt="dropdown" class="dropdown-arrow">
+                <button id="daySelectorButton" class="dropdown__trigger hourly-forecast__trigger" data-target="hourlyForecastDropdown">–
+                  <img src="/assets/images/icon-dropdown.svg" alt="dropdown" class="dropdown__arrow">
                 </button>
 
-                <div id="hourlyForecastDropdown" class="dropdown-content hourly-forecast__dropdown hidden">
+                <div id="hourlyForecastDropdown" class="dropdown__menu hourly-forecast__menu">
                 <button class="hourly-forecast__dropdown-button">Monday</button>
                 <button class="hourly-forecast__dropdown-button">Tuesday</button>
                 <button class="hourly-forecast__dropdown-button">Wednesday</button>

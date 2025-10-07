@@ -700,3 +700,47 @@ input {
 }
 
 /* ------------------------ */
+
+/*  MEDIA QUERIES   */
+
+@media screen and (min-width: 768px) {
+    .container {
+        padding: var(--spacing-100) var(--spacing-800) var(--spacing-1000);
+    }
+    .search__content, .search {
+        flex-direction: row;
+    }
+    .search__button {
+        width: 7.25rem;
+    }
+    .weather__info {
+        flex-direction: row;
+        justify-content: space-around;
+        text-align: left;
+    }
+    .weather__location {
+        align-items: flex-start;
+        text-align: left;
+    }
+    .key-metrics__list {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-300);
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .container {
+        padding: var(--spacing-300) 0 var(--spacing-1000);
+    }
+    .grid-layout {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: var(--spacing-400);
+    }
+    .grid-layout__left-column {
+        grid-column: span 8;
+    }
+    .grid-layout__right-column {
+        grid-column: span 4;
+    }
+}

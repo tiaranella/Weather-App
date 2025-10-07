@@ -1,3 +1,15 @@
+async function fetchWithTimeout(url, options = {}, timeout = 5000) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+  try {
+    const response = await fetch(url, { ...options, signal: controller.signal });
+    return response;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
 async function fetchWeather(lat, lon) {
   const url = `https://api.open-meteo.com/v1/forecast?` +
     `latitude=${lat}&longitude=${lon}&` +
@@ -6,15 +18,8 @@ async function fetchWeather(lat, lon) {
     `daily=weather_code,temperature_2m_max,temperature_2m_min&` +
     `timezone=auto`;
 
-  const controller = new AbortController();
-  const { signal } = controller;
-  const TIMEOUT_DURATION = 5000;
-
-  const timeoutId = setTimeout(() => controller.abort(), TIMEOUT_DURATION);
-
   try {
-    const response = await fetch(url, { signal });
-
+    const response = await fetchWithTimeout(url, {}, 5000);
     if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
     throw new Error(message);
@@ -26,8 +31,6 @@ async function fetchWeather(lat, lon) {
       console.log("Fetch request was aborted");
     }
     throw error;
-  } finally {
-    clearTimeout(timeoutId);
   }
 }
 
@@ -36,16 +39,11 @@ async function getCoordinates(city) {
     throw new Error('Invalid city name');
   }
 
-  const controller = new AbortController();
-  const { signal } = controller;
-  const TIMEOUT_DURATION = 5000;
-  const timeoutId = setTimeout(() => controller.abort(), TIMEOUT_DURATION);
-
   try {
     const encodedCity = encodeURIComponent(city.trim());
     const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodedCity}&count=1&language=en&format=json`;
 
-    const response = await fetch(url, { signal });
+    const response = await fetchWithTimeout(url, {}, 5000);
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
@@ -71,8 +69,6 @@ async function getCoordinates(city) {
         throw new Error(`Geocoding request timed out after ${TIMEOUT_DURATION}ms`);
       }
       throw error;
-  } finally {
-      clearTimeout(timeoutId);
   }
 }
 

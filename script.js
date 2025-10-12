@@ -67,7 +67,15 @@ function getWeatherDescription(code) {
 }
 
 function formatTemp(temp) {
-    return `${Math.round(temp)}°C`;
+  return `${Math.round(temp)}°C`;
+}
+
+function formatWind(value) {
+  return `${Math.round(value)} km/h`;
+}
+
+function formatPrecipitation(value) {
+  return `${Math.round(value)} mm`;
 }
 
 async function fetchWithTimeout(url, options = {}, timeout = 5000) {
@@ -172,12 +180,47 @@ function renderDailyWeather(daily) {
   });
 }
 
+function renderCurrentWeather(current, location) {
+  if (!current || typeof current !== 'object' || !location || typeof location !== 'object') {
+    throw new Error('Invalid current weather or location data');
+  }
+
+  const weatherInfoEl = document.querySelector('.weather__info');
+  const icon = getWeatherIcon(current.weather_code);
+
+  const currentDate = new Date(current.time);
+  const formattedDate = currentDate.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+
+  weatherInfoEl.innerHTML = `
+    <section class="weather__location">
+      <h2>${location.name}, ${location.country}</h2>
+      <p class="weather__date">${formattedDate}</p>
+    </section>
+    <section class="weather__temperature">
+      <img src="/assets/images/${icon}" alt="Current weather" class="weather__icon">
+      <p class="weather__degrees">${formatTemp(current.temperature_2m, true)}</p>
+    </section>
+  `;
+    
+  const metrics = document.querySelectorAll('.key-metrics__value');
+  metrics[0].textContent = formatTemp(current.temperature_2m, true); // Feels like
+  metrics[1].textContent = `${Math.round(current.relative_humidity_2m)}%`; // Humidity
+  metrics[2].textContent = formatWind(current.wind_speed_10m, true); // Wind
+  metrics[3].textContent = formatPrecipitation(current.precipitation, true); // Precipitation
+}
+
 async function initApp() {
   const coords = await getCoordinates('London');
   const weather = await fetchWeather(coords.latitude, coords.longitude);
   console.log(weather, coords); // NEED TO REMOVE
 
   renderDailyWeather(weather.daily);
+  renderCurrentWeather(weather.current, coords);
 }
 
 document.addEventListener('DOMContentLoaded', initApp);

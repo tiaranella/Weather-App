@@ -114,42 +114,49 @@ async function fetchWeather(lat, lon) {
   }
 }
 
-async function getCoordinates(city) {
-  if (!city || typeof city !== 'string' || city.trim() === '') {
-    throw new Error('Invalid city name');
+async function fetchGeocodingResults(query, count = 1) {
+  if (!query || typeof query !== 'string' || query.trim() === '') {
+    throw new Error('Invalid search query');
   }
 
   try {
-    const encodedCity = encodeURIComponent(city.trim());
-    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodedCity}&count=1&language=en&format=json`;
-
+    const encodedQuery = encodeURIComponent(query.trim());
+    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodedQuery}&count=${count}&language=en&format=json`;
     const response = await fetchWithTimeout(url, {});
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
 
     const data = await response.json();
+
     if (!Array.isArray(data.results) || data.results.length === 0) {
-      throw new Error(`No geocoding results for: "${city}"`);
+      throw new Error(`No geocoding results for: "${query}"`);
     }
 
-    const result = data.results[0];
-    if (result.latitude == null || result.longitude == null) {
-      throw new Error("Invalid geocoding response: missing coordinates");
+    return data.results;
+  } catch(error) {
+    if (error.name === 'AbortError') {
+      throw new Error('Geocoding request timed out');
     }
-    
-    return {
-      latitude: data.results[0].latitude,
-      longitude: data.results[0].longitude,
-      name: data.results[0].name,
-      country: data.results[0].country
-    }; 
-  } catch (error) {
-      if (error.name === 'AbortError') {
-        throw new Error(`Geocoding request timed out`);
-      }
-      throw error;
+    throw error;
   }
+}
+
+async function getCoordinates(city) {
+  const results = await fetchGeocodingResults(city, 1);
+  const result = results[0];
+
+  if (result.latitude == null || result.longitude == null) {
+    throw new Error("Invalid geocoding response: missing coordinates");
+  }
+  
+  return {
+    latitude: results.latitude,
+    longitude: results.longitude,
+    name: results.name,
+    country: results.country
+  };
 }
 
 function renderDailyWeather(daily) {

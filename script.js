@@ -214,6 +214,49 @@ function renderCurrentWeather(current, location) {
   metrics[3].textContent = formatPrecipitation(current.precipitation, true); // Precipitation
 }
 
+function renderHourlyWeather(hourly, locationTimezone) {
+  if (!hourly || !hourly.time || hourly.time.length === 0) return;
+  
+  const items = document.querySelectorAll('.hourly-forecast__item');
+  const now = new Date();
+  
+  // Find starting index of the day
+  const startIndex = hourly.time.findIndex(time => {
+    return new Date(time) >= now;
+  });
+  
+  if (startIndex === -1) {
+    items.forEach(item => item.style.display = 'none');
+    return;
+  };
+  
+  items.forEach((item, i) => {
+    const idx = startIndex + i;
+
+    if (idx >= hourly.time.length) {
+      item.style.display = 'none';
+      return;
+    };
+    
+    try {
+      const time = new Date(hourly.time[idx]);
+      item.querySelector('.hourly-forecast__time').textContent = time.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, timeZone: locationTimezone });
+      item.querySelector('.hourly-forecast__temp').textContent = formatTemp(hourly.temperature_2m[idx]);
+      
+      const icon = getWeatherIcon(hourly.weather_code[idx]);
+      const desc = getWeatherDescription(hourly.weather_code[idx]);
+      const iconEl = item.querySelector('.hourly-forecast__icon');
+      
+      iconEl.src = `/assets/images/${icon}`;
+      iconEl.alt = desc;
+      item.style.display = 'flex';
+    } catch(error) {
+      console.error('Error rendering hourly forecast item', error);
+      item.style.display = 'none';
+    }
+  });
+}
+
 async function initApp() {
   const coords = await getCoordinates('London');
   const weather = await fetchWeather(coords.latitude, coords.longitude);
@@ -221,6 +264,7 @@ async function initApp() {
 
   renderDailyWeather(weather.daily);
   renderCurrentWeather(weather.current, coords);
+  renderHourlyWeather(weather.hourly, weather.timezone);
 }
 
 document.addEventListener('DOMContentLoaded', initApp);

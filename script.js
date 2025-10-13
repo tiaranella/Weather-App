@@ -152,10 +152,10 @@ async function getCoordinates(city) {
   }
   
   return {
-    latitude: results.latitude,
-    longitude: results.longitude,
-    name: results.name,
-    country: results.country
+    latitude: result.latitude,
+    longitude: result.longitude,
+    name: result.name,
+    country: result.country
   };
 }
 

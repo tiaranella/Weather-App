@@ -159,6 +159,104 @@ async function getCoordinates(city) {
   };
 }
 
+async function searchLocation(query) {
+  try {
+    const coords = await getCoordinates(query);
+    const weather = await fetchWeather(coords.latitude, coords.longitude);
+      
+    renderDailyWeather(weather.daily);
+    renderCurrentWeather(weather.current, coords);
+    renderHourlyWeather(weather.hourly, weather.timezone);
+  } catch (error) {
+    console.error('Search location error:', error);
+  }
+}
+
+async function handleAutocompleteInput(query) {
+  if (!query || query.trim().length < 2) {
+    return;
+  }
+  
+  try {
+    const results = await fetchGeocodingResults(query, 5);
+    showAutocomplete(results);
+  } catch (error) {
+    console.error('Autocomplete error:', error);
+  }
+}
+
+function setupSearchHandlers() {
+  const searchInput = document.getElementById('search_query');
+  const searchButton = document.querySelector('.search__button');
+  let autocompleteTimeout = null;
+  
+  // Autocomplete on input
+  searchInput.addEventListener('input', (e) => {
+    clearTimeout(autocompleteTimeout);
+    autocompleteTimeout = setTimeout(() => {
+      handleAutocompleteInput(e.target.value);
+    }, 300);
+  });
+    
+    // Search with button
+  searchButton.addEventListener('click', () => {
+    const query = searchInput.value.trim();
+    if (query) {
+      searchLocation(query);
+      const container = document.getElementById('autocompleteResults');
+        if (container) {
+          container.classList.add('hidden');
+        }
+    }
+  });
+    
+    // Search with Enter key
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      const query = searchInput.value.trim();
+      if (query) {
+        searchLocation(query);
+        const container = document.getElementById('autocompleteResults');
+        if (container) {
+          container.classList.add('hidden');
+        }
+      }
+    }
+  });
+    
+    // Close autocomplete on outside click
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#search_query') && !e.target.closest('#autocompleteResults')) {
+        const container = document.getElementById('autocompleteResults');
+        if (container) {
+          container.classList.add('hidden');
+        }
+      }
+  });
+}
+
+function showAutocomplete(results) {
+  const container = document.getElementById('autocompleteResults');
+  container.innerHTML = '';
+  
+  results.forEach(result => {
+    const item = document.createElement('div');
+    item.className = 'search__result';
+    item.textContent = `${result.name}, ${result.country}`;
+    item.addEventListener('click', () => {
+      document.getElementById('search_query').value = result.name;
+      const container = document.getElementById('autocompleteResults');
+        if (container) {
+          container.classList.add('hidden');
+        }
+      searchLocation(result.name);
+    });
+    container.appendChild(item);
+  });
+  
+  container.classList.remove('hidden');
+}
+
 function renderDailyWeather(daily) {
   if (!daily || !Array.isArray(daily.time)) {
     throw new Error('Invalid daily weather data');
@@ -272,6 +370,8 @@ async function initApp() {
   renderDailyWeather(weather.daily);
   renderCurrentWeather(weather.current, coords);
   renderHourlyWeather(weather.hourly, weather.timezone);
+
+  setupSearchHandlers();
 }
 
 document.addEventListener('DOMContentLoaded', initApp);

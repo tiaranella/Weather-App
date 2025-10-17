@@ -202,11 +202,8 @@ function setupSearchHandlers() {
   searchButton.addEventListener('click', () => {
     const query = searchInput.value.trim();
     if (query) {
+      hideAutocomplete();
       searchLocation(query);
-      const container = document.getElementById('autocompleteResults');
-        if (container) {
-          container.classList.add('hidden');
-        }
     }
   });
     
@@ -215,22 +212,16 @@ function setupSearchHandlers() {
     if (e.key === 'Enter') {
       const query = searchInput.value.trim();
       if (query) {
+        hideAutocomplete();
         searchLocation(query);
-        const container = document.getElementById('autocompleteResults');
-        if (container) {
-          container.classList.add('hidden');
         }
       }
-    }
   });
     
     // Close autocomplete on outside click
   document.addEventListener('click', (e) => {
     if (!e.target.closest('#search_query') && !e.target.closest('#autocompleteResults')) {
-        const container = document.getElementById('autocompleteResults');
-        if (container) {
-          container.classList.add('hidden');
-        }
+        hideAutocomplete();
       }
   });
 }
@@ -245,16 +236,21 @@ function showAutocomplete(results) {
     item.textContent = `${result.name}, ${result.country}`;
     item.addEventListener('click', () => {
       document.getElementById('search_query').value = result.name;
-      const container = document.getElementById('autocompleteResults');
-        if (container) {
-          container.classList.add('hidden');
-        }
+      hideAutocomplete();
       searchLocation(result.name);
     });
     container.appendChild(item);
   });
   
   container.classList.remove('hidden');
+}
+
+function hideAutocomplete() {
+  const container = document.getElementById('autocompleteResults');
+  if (container) {
+    container.innerHTML = '';
+    container.classList.add('hidden');
+  }
 }
 
 function renderDailyWeather(daily) {

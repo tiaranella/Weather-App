@@ -93,8 +93,8 @@ export class WeatherService {
     }
 
     async searchLocation(city) {
-        const coords = await getCoordinates(city);
-        const weather = await fetchWeather(coords.latitude, coords.longitude);
+        const coords = await this.getCoordinates(city);
+        const weather = await this.fetchWeather(coords.latitude, coords.longitude);
 
         return { ...weather, location: coords };
     }

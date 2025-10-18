@@ -1,4 +1,4 @@
-import { fetchWithTimeout } from '../fetchUtils.js';
+import { fetchWithTimeout } from '../utils/FetchUtils.js';
 
 export class WeatherService {
     async fetchWeather(lat, lon) {

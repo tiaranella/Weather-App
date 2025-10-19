@@ -1,4 +1,4 @@
-import { getWeatherIcon, formatTemp, getWeatherDescription } from "../WeatherUtils";
+import { getWeatherIcon, formatTemp, getWeatherDescription } from "../utils/WeatherUtils";
 
 export class DailyForecast {
     constructor() {

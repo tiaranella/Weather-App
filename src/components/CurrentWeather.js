@@ -1,4 +1,4 @@
-import { getWeatherIcon, formatTemp, formatWind, formatPrecipitation } from "../utils/WeatherUtils";
+import { getWeatherIcon, formatTemp, formatWind, formatPrecipitation } from "../utils/WeatherUtils.js";
 
 export class CurrentWeather {
     constructor() {

@@ -1,4 +1,4 @@
-import { getWeatherIcon, formatTemp, getWeatherDescription } from "../utils/WeatherUtils";
+import { getWeatherIcon, formatTemp, getWeatherDescription } from "../utils/WeatherUtils.js";
 
 export class HourlyForecast {
     constructor() {

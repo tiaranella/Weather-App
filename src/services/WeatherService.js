@@ -31,8 +31,21 @@ export class WeatherService {
         }
     }
 
-    async searchLocation(city) {
-        const coords = await this.getCoordinates(city);
+    // FIX: support receiving either the string for manual search or the selected object
+    async searchLocation(cityOrData) {
+        let coords;
+        
+        if (typeof cityOrData === 'object' && cityOrData !== null) {
+            coords = {
+                latitude: cityOrData.latitude,
+                longitude: cityOrData.longitude,
+                name: cityOrData.name,
+                country: cityOrData.country
+            };
+        } else {
+            coords = await this.getCoordinates(cityOrData);
+        }
+        
         const weather = await this.fetchWeather(coords.latitude, coords.longitude);
         return { ...weather, location: coords };
     }

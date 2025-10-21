@@ -62,7 +62,7 @@ export class Search {
             item.addEventListener('click', () => {
                 this.input.value = result.name;
                 this.hideAutocomplete();
-                this.triggerSearch(result.name);
+                this.triggerSearch(result);
             });
             this.autocompleteContainer.appendChild(item);
         });

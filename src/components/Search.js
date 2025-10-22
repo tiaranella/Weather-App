@@ -1,7 +1,7 @@
 export class Search {
     constructor(onSearchCallback) {
+        this.form = document.getElementById('searchForm');
         this.input = document.getElementById('search_query');
-        this.button = document.querySelector('.search__button');
         this.autocompleteContainer = document.getElementById('autocompleteResults');
         this.onSearchCallback = onSearchCallback;
         this.autocompleteTimeout = null;
@@ -10,11 +10,17 @@ export class Search {
     }
 
     init() {
-        this.input.addEventListener('input', (e) => this.handleInput(e));
-        this.button.addEventListener('input', () => this.handleSearch());
-        this.input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') this.handleSearch();
-        });
+        if (this.input) {
+            this.input.addEventListener('input', (e) => this.handleInput(e));
+        }
+
+        if (this.form) {
+            this.form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.handleSearch();
+            });
+        }
+
         document.addEventListener('click', (e) => this.handleOutsideClick(e));
     }
 
@@ -22,7 +28,7 @@ export class Search {
         clearTimeout(this.autocompleteTimeout);
         const query = e.target.value;
 
-        if (!query || query.trim().lenght < 2) {
+        if (!query || query.trim().length < 2) {
             this.hideAutocomplete();
             return;
         }

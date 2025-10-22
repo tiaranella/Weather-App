@@ -66,14 +66,16 @@ export function getWeatherDescription(code) {
   return descriptions[code] || 'Unknown weather';
 }
 
-export function formatTemp(temp) {
-  return `${Math.round(temp)}°C`;
+export function formatTemp(temp, unit = 'celsius') {
+    const rounded = Math.round(temp);
+    return unit === 'fahrenheit' ? `${Math.round((temp * 9/5) + 32)}°F` : `${rounded}°C`;
 }
 
-export function formatWind(value) {
-  return `${Math.round(value)} km/h`;
+export function formatWind(value, unit = 'kmh') {
+    return unit === 'mph' ? `${Math.round(value * 0.621371)} mph` : `${Math.round(value)} km/h`;
 }
 
-export function formatPrecipitation(value) {
-  return `${Math.round(value)} mm`;
+export function formatPrecipitation(value, unit = 'mm') {
+    if (value == null) value = 0;
+    return unit === 'inch' ? `${(value * 0.0393701).toFixed(2)} inch` : `${Math.round(value)} mm`;
 }

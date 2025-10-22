@@ -6,7 +6,7 @@ export class CurrentWeather {
         this.metrics = document.querySelectorAll('.key-metrics__value');
     }
 
-    render(data) {
+    render(data, units) {
         const { current, location } = data;
         if (!current || !location) return;
 
@@ -26,15 +26,15 @@ export class CurrentWeather {
             </section>
             <section class="weather__temperature">
                 <img src="/assets/images/${icon}" alt="Current weather" class="weather__icon">
-                <p class="weather__degrees">${formatTemp(current.temperature_2m)}</p>
+                <p class="weather__degrees">${formatTemp(current.temperature_2m, units?.temperature)}</p>
             </section>
         `;
 
         if (this.metrics.length >= 4) {
-            this.metrics[0].textContent = formatTemp(current.temperature_2m);
+            this.metrics[0].textContent = formatTemp(current.temperature_2m, units?.temperature);
             this.metrics[1].textContent = `${Math.round(current.relative_humidity_2m)}%`;
-            this.metrics[2].textContent = formatWind(current.wind_speed_10m);
-            this.metrics[3].textContent = formatPrecipitation(current.precipitation);
+            this.metrics[2].textContent = formatWind(current.wind_speed_10m, units?.wind);
+            this.metrics[3].textContent = formatPrecipitation(current.precipitation, units?.precipitation);
         }
     }
 }

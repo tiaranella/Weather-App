@@ -5,7 +5,7 @@ export class DailyForecast {
         this.items = document.querySelectorAll('.daily-forecast__item');
     }
 
-    render(daily) {
+    render(daily, selectedDayIndex, units) {
         if (!daily || !Array.isArray(daily.time) || this.items.length === 0) return;
 
         this.items.forEach((item, i) => {
@@ -18,8 +18,14 @@ export class DailyForecast {
             item.querySelector('.daily-forecast__day').textContent = dayName;
             item.querySelector('.daily-forecast__icon').src = `/assets/images/${icon}`;
             item.querySelector('.daily-forecast__icon').alt = getWeatherDescription(daily.weather_code[i]);
-            item.querySelector('.daily-forecast__high').textContent = formatTemp(daily.temperature_2m_max[i]);
-            item.querySelector('.daily-forecast__low').textContent = formatTemp(daily.temperature_2m_min[i]);
+            item.querySelector('.daily-forecast__high').textContent = formatTemp(daily.temperature_2m_max[i], units?.temperature);
+            item.querySelector('.daily-forecast__low').textContent = formatTemp(daily.temperature_2m_min[i], units?.temperature);
+            
+            if (i === selectedDayIndex) {
+                item.classList.add('active'); 
+            } else {
+                item.classList.remove('active');
+            }
         });
     }
 }

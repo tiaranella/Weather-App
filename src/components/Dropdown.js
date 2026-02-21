@@ -104,7 +104,7 @@ export class Dropdown {
         const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const todayIndex = new Date().getDay();
         const dayName = dayIndex === 0 ? 'Today' : weekdays[(todayIndex + dayIndex) % 7];
-        this.dayTrigger.innerHTML = `${dayName} <img src="/assets/images/icon-dropdown.svg" alt="dropdown" class="dropdown__arrow">`;
+        this.dayTrigger.innerHTML = `${dayName} <img src="./assets/images/icon-dropdown.svg" alt="dropdown" class="dropdown__arrow">`;
     }
 
     updateUnitUI(units) {

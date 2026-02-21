@@ -25,7 +25,7 @@ export class CurrentWeather {
                 <p class="weather__date">${formattedDate}</p>
             </section>
             <section class="weather__temperature">
-                <img src="/assets/images/${icon}" alt="Current weather" class="weather__icon">
+                <img src="./assets/images/${icon}" alt="Current weather" class="weather__icon">
                 <p class="weather__degrees">${formatTemp(current.temperature_2m, units?.temperature)}</p>
             </section>
         `;

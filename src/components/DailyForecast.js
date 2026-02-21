@@ -16,7 +16,7 @@ export class DailyForecast {
             const icon = getWeatherIcon(daily.weather_code[i]);
 
             item.querySelector('.daily-forecast__day').textContent = dayName;
-            item.querySelector('.daily-forecast__icon').src = `/assets/images/${icon}`;
+            item.querySelector('.daily-forecast__icon').src = `./assets/images/${icon}`;
             item.querySelector('.daily-forecast__icon').alt = getWeatherDescription(daily.weather_code[i]);
             item.querySelector('.daily-forecast__high').textContent = formatTemp(daily.temperature_2m_max[i], units?.temperature);
             item.querySelector('.daily-forecast__low').textContent = formatTemp(daily.temperature_2m_min[i], units?.temperature);

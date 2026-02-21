@@ -52,7 +52,7 @@ export class HourlyForecast {
                 const desc = getWeatherDescription(hourly.weather_code[idx]);
                 const iconEl = item.querySelector('.hourly-forecast__icon');
 
-                iconEl.src = `/assets/images/${icon}`;
+                iconEl.src = `./assets/images/${icon}`;
                 iconEl.alt = desc;
                 item.style.display = 'flex';
             } catch (error) {

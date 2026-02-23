@@ -5,6 +5,16 @@ export class HourlyForecast {
         this.items = document.querySelectorAll('.hourly-forecast__item');
     }
 
+    showSkeleton() {
+        this.items.forEach(item => {
+            item.classList.add('skeleton');
+            item.querySelector('.hourly-forecast__time').textContent = '';
+            item.querySelector('.hourly-forecast__temp').textContent = '';
+            item.querySelector('.hourly-forecast__icon').removeAttribute('src');
+            item.style.display = 'flex';
+        });
+    }
+
     render(hourly, timezone, units, dayIndex = 0) {
         if (!hourly || !hourly.time || this.items.length === 0) return;
 
@@ -40,6 +50,8 @@ export class HourlyForecast {
                 item.style.display = 'none';
                 return;
             }
+
+            item.classList.remove('skeleton')
 
             try {
                 const time = new Date(hourly.time[idx]);

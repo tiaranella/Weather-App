@@ -5,11 +5,23 @@ export class DailyForecast {
         this.items = document.querySelectorAll('.daily-forecast__item');
     }
 
+    showSkeleton() {
+        this.items.forEach(item => {
+            item.classList.add('skeleton');
+            item.querySelector('.daily-forecast__day').textContent = '';
+            item.querySelector('.daily-forecast__icon').removeAttribute('src');
+            item.querySelector('.daily-forecast__high').textContent = '';
+            item.querySelector('.daily-forecast__low').textContent = '';
+        });
+    }
+
     render(daily, selectedDayIndex, units) {
         if (!daily || !Array.isArray(daily.time) || this.items.length === 0) return;
 
         this.items.forEach((item, i) => {
             if (i >= daily.time.length) return;
+
+            item.classList.remove('skeleton');
 
             const apiDate = new Date(daily.time[i]);
             const dayName = apiDate.toLocaleDateString('en-US', { weekday: 'short' });

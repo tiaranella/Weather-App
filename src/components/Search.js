@@ -38,8 +38,9 @@ export class Search {
         }, 300);
     }
 
-    async fetchAutocomplete(query) {
+        async fetchAutocomplete(query) {
         try {
+            this.form.classList.add('skeleton');
             const encodedQuery = encodeURIComponent(query.trim());
             const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodedQuery}&count=5&language=en&format=json`;
             const response = await fetch(url);
@@ -50,8 +51,11 @@ export class Search {
             }
         } catch (error) {
             console.error(`Autocomplete error:`, error);
+        } finally {
+            this.form.classList.remove('skeleton');
         }
     }
+
 
     showAutocomplete(results) {
         this.autocompleteContainer.innerHTML = '';

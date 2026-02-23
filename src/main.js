@@ -26,8 +26,15 @@ class App {
         };
     }
 
+    showSkeletons() {
+        this.components.current.showSkeleton();
+        this.components.daily.showSkeleton();
+        this.components.hourly.showSkeleton();
+    }
+
     async handleSearch(query) {
         try {
+            this.showSkeletons();
             const data = await this.service.searchLocation(query);
             this.state.weatherData = data;
             this.renderAll();
@@ -47,7 +54,6 @@ class App {
         }
         Object.keys(this.state.units).forEach(key => localStorage.setItem(`${key}Unit`, this.state.units[key]));
         
-        // Notify dropdown to update checkmarks and buttons
         if (this.components.dropdown) {
             this.components.dropdown.updateUnitUI(this.state.units);
         }
@@ -74,7 +80,7 @@ class App {
     init() {
         this.components.search = new Search(this.handleSearch.bind(this));
         this.components.dropdown = new Dropdown(this.handleUnitChange.bind(this), this.handleDayChange.bind(this));
-        this.components.dropdown.updateUnitUI(this.state.units); // Initial UI update
+        this.components.dropdown.updateUnitUI(this.state.units);
 
         this.handleSearch('London');
     }

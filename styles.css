@@ -701,6 +701,116 @@ input {
 
 /* ------------------------ */
 
+/*  SKELETON LOADING    */
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, var(--neutral-800) 25%, var(--neutral-600) 50%, var(--neutral-800) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    color: transparent;
+    pointer-events: none;
+    border-radius: 0.75rem; 
+}
+
+.search__skeleton {
+    width: 100%;
+    border-radius: var(--radius-24);
+    background: linear-gradient(90deg, var(--neutral-800) 25%, var(--neutral-600) 50%, var(--neutral-800) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    position: absolute;
+    display: none;
+}
+
+.search.skeleton .search__content {
+    width: 100%;
+    max-width: 41rem;
+}
+
+.search.skeleton .search__skeleton {
+    display: block;
+}
+
+.search.skeleton .search__input,
+.search.skeleton .search__button {
+    visibility: hidden;
+}
+
+.daily-forecast__header .app-title.skeleton,
+.daily-forecast__header span.skeleton {
+    border-radius: 0.25rem;
+    display: inline-block;
+    min-width: 7.5rem;
+    color: transparent;
+}
+
+.hourly-forecast__header.skeleton {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hourly-forecast__header.skeleton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, var(--neutral-800) 25%, var(--neutral-600) 50%, var(--neutral-800) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    z-index: 1;
+}
+
+.hourly-forecast__header.skeleton > * {
+    visibility: hidden;
+}
+
+.hourly-forecast__item.skeleton .hourly-forecast__icon {
+    visibility: hidden;
+}
+
+.hourly-forecast__item.skeleton .hourly-forecast__time, 
+.hourly-forecast__item.skeleton .hourly-forecast__temp,
+.key-metrics__item.skeleton .key-metrics__label,
+.key-metrics__item.skeleton .key-metrics__value {
+    opacity: 0;
+}
+
+.weather__info.skeleton {
+    background: none;
+    background-image: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.weather__info.skeleton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--neutral-800) 25%, var(--neutral-600) 50%, var(--neutral-800) 75%);
+    background-size: 200% 100%;
+    background-position: 200% 0;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--radius-20);
+}
+
+.weather-info.skeleton > * {
+    visibility: hidden;
+}
+
 /*  MEDIA QUERIES   */
 
 @media screen and (min-width: 768px) {

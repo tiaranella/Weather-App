@@ -6,9 +6,22 @@ export class CurrentWeather {
         this.metrics = document.querySelectorAll('.key-metrics__value');
     }
 
+    showSkeleton() {
+        this.container.innerHTML = '';
+        this.container.classList.add('skeleton');
+        
+        this.metrics.forEach(metric => {
+            const parent = metric.closest('.key-metrics__item');
+            if (parent) parent.classList.add('skeleton');
+            metric.classList.add('hidden');
+        });
+    }
+
     render(data, units) {
         const { current, location } = data;
         if (!current || !location) return;
+
+        this.container.classList.remove('skeleton');
 
         const icon = getWeatherIcon(current.weather_code);
         const currentDate = new Date(current.time);
@@ -31,6 +44,12 @@ export class CurrentWeather {
         `;
 
         if (this.metrics.length >= 4) {
+            this.metrics.forEach(metric => {
+                const parent = metric.closest('.key-metrics__item');
+                if (parent) parent.classList.remove('skeleton');
+                metric.classList.remove('hidden');
+            });
+            
             this.metrics[0].textContent = formatTemp(current.temperature_2m, units?.temperature);
             this.metrics[1].textContent = `${Math.round(current.relative_humidity_2m)}%`;
             this.metrics[2].textContent = formatWind(current.wind_speed_10m, units?.wind);

@@ -22,7 +22,7 @@
         <img src="./assets/images/icon-dropdown.svg" alt="dropdown" class="dropdown__arrow" width="16">
       </button>
       
-      <div id="unitsDropdown" class="dropdown__menu">
+      <div id="unitsDropdown" class="dropdown__menu hidden">
         <button id="toggleUnitsButton" class="dropdown__action">Switch to Imperial</button>
         <hr>
 
@@ -80,6 +80,7 @@
     <main class="main-content-wrapper">
 
       <div class="search">
+        <div class="search__skeleton hidden"></div>
         <div class="search__content">
             <div class="search__input">
               <form id="searchForm" class="search__form">
@@ -97,32 +98,32 @@
         <div class="grid-layout__left-column">
 
           <section class="weather">
-            <section class="weather__info">
+            <section class="weather__info skeleton">
 
             </section>
             <ul class="key-metrics__list">
-              <li class="key-metrics__item">
+              <li class="key-metrics__item skeleton">
                 <article class="key-metrics__item-content">
-                  <p class="key-metrics__label">Feels Like</p>
-                  <p class="key-metrics__value">—</p>
+                  <p class="key-metrics__label hidden">Feels Like</p>
+                  <p class="key-metrics__value hidden">—</p>
                 </article>
               </li>
-              <li class="key-metrics__item">
+              <li class="key-metrics__item skeleton">
                 <article class="key-metrics__item-content">
-                  <p class="key-metrics__label">Humidity</p>
-                  <p class="key-metrics__value">—</p>
+                  <p class="key-metrics__label hidden">Humidity</p>
+                  <p class="key-metrics__value hidden">—</p>
                 </article>
               </li>
-              <li class="key-metrics__item">
+              <li class="key-metrics__item skeleton">
                 <article class="key-metrics__item-content">
-                  <p class="key-metrics__label">Wind</p>
-                  <p class="key-metrics__value">—</p>
+                  <p class="key-metrics__label hidden">Wind</p>
+                  <p class="key-metrics__value hidden">—</p>
                 </article>
               </li>
-              <li class="key-metrics__item">
+              <li class="key-metrics__item skeleton">
                 <article class="key-metrics__item-content">
-                  <p class="key-metrics__label">Precipitation</p>
-                  <p class="key-metrics__value">—</p>
+                  <p class="key-metrics__label hidden">Precipitation</p>
+                  <p class="key-metrics__value hidden">—</p>
                 </article>
               </li>
             </ul>
@@ -209,7 +210,7 @@
                   <img src="./assets/images/icon-dropdown.svg" alt="dropdown" class="dropdown__arrow">
                 </button>
 
-                <div id="hourlyForecastDropdown" class="dropdown__menu hourly-forecast__menu">
+                <div id="hourlyForecastDropdown" class="dropdown__menu hourly-forecast__menu hidden">
                 <button class="hourly-forecast__dropdown-button">Monday</button>
                 <button class="hourly-forecast__dropdown-button">Tuesday</button>
                 <button class="hourly-forecast__dropdown-button">Wednesday</button>
@@ -222,7 +223,7 @@
             </header>
 
             <div class="hourly-forecast__list">
-              <article class="hourly-forecast__item">
+              <article class="hourly-forecast__item skeleton">
                 <section class="hourly-forecast__item-left">
                   <img src="" alt="" class="hourly-forecast__icon">
                   <p class="hourly-forecast__time"></p>
@@ -230,7 +231,7 @@
                 <p class="hourly-forecast__temp"></p>
               </article>
 
-              <article class="hourly-forecast__item">
+              <article class="hourly-forecast__item skeleton">
                 <section class="hourly-forecast__item-left">
                   <img src="" alt="" class="hourly-forecast__icon">
                   <p class="hourly-forecast__time"></p>
@@ -238,7 +239,7 @@
                 <p class="hourly-forecast__temp"></p>
               </article>
 
-              <article class="hourly-forecast__item">
+              <article class="hourly-forecast__item skeleton">
                 <section class="hourly-forecast__item-left">
                   <img src="" alt="" class="hourly-forecast__icon">
                   <p class="hourly-forecast__time"></p>
@@ -246,7 +247,7 @@
                 <p class="hourly-forecast__temp"></p>
               </article>
 
-              <article class="hourly-forecast__item">
+              <article class="hourly-forecast__item skeleton">
                 <section class="hourly-forecast__item-left">
                   <img src="" alt="" class="hourly-forecast__icon">
                   <p class="hourly-forecast__time"></p>
@@ -254,7 +255,7 @@
                 <p class="hourly-forecast__temp"></p>
               </article>
 
-              <article class="hourly-forecast__item">
+              <article class="hourly-forecast__item skeleton">
                 <section class="hourly-forecast__item-left">
                   <img src="" alt="" class="hourly-forecast__icon">
                   <p class="hourly-forecast__time"></p>
@@ -262,7 +263,7 @@
                 <p class="hourly-forecast__temp"></p>
               </article>
 
-              <article class="hourly-forecast__item">
+              <article class="hourly-forecast__item skeleton">
                 <section class="hourly-forecast__item-left">
                   <img src="" alt="" class="hourly-forecast__icon">
                   <p class="hourly-forecast__time"></p>
@@ -270,7 +271,7 @@
                 <p class="hourly-forecast__temp"></p>
               </article>
 
-              <article class="hourly-forecast__item">
+              <article class="hourly-forecast__item skeleton">
                 <section class="hourly-forecast__item-left">
                   <img src="" alt="" class="hourly-forecast__icon">
                   <p class="hourly-forecast__time"></p>
@@ -278,7 +279,7 @@
                 <p class="hourly-forecast__temp"></p>
               </article>
 
-              <article class="hourly-forecast__item">
+              <article class="hourly-forecast__item skeleton">
                 <section class="hourly-forecast__item-left">
                   <img src="" alt="" class="hourly-forecast__icon">
                   <p class="hourly-forecast__time"></p>

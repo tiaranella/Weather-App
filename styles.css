@@ -144,10 +144,10 @@ body {
 }
 
 .app-title:not(.page-header) {
-    text-align: left;
+    text-align: center;
     justify-content: center;
     padding: var(--spacing-150); 
-    margin: var(--spacing-800) 0;
+    margin: var(--spacing-800) auto;
     max-width: 100%;
 }
 
@@ -511,18 +511,14 @@ input {
 }
 
 .daily-forecast__list {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: var(--spacing-200);
-    padding: var(--spacing-200) var(--spacing-0);
-    overflow-x: auto;
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-150);
+    padding: var(--spacing-200) 0;
 }
 
 .daily-forecast__item {
     background-color: var(--neutral-800);
-    min-width: 6.25rem;
     height: 10.25rem;
     border-radius: var(--radius-12);
     border: 1px solid var(--neutral-600);
@@ -530,7 +526,8 @@ input {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+    width: 100%;
+    min-width: unset;
 }
 
 .daily-forecast__day {
@@ -811,7 +808,41 @@ input {
     visibility: hidden;
 }
 
+/* ------------------------ */
+
 /*  MEDIA QUERIES   */
+
+@media screen and (max-width: 767px) {
+    .container__header > img {
+        height: 2rem;
+        width: auto;
+    }
+
+    .dropdown__trigger {
+        min-width: 7rem;
+        height: 2.5rem;
+        padding: var(--spacing-100) var(--spacing-150);
+        font: var(--font-preset-8);
+        gap: var(--spacing-075);
+    }
+    
+    .weather__info {
+        padding: var(--spacing-200);
+    }
+
+    .weather__icon {
+        width: 6rem;
+        height: 6rem;
+    }
+    
+    .weather__degrees {
+        font-size: 5rem;
+    }
+    
+    .weather__temperature {
+        gap: var(--spacing-100);
+    }
+}
 
 @media screen and (min-width: 768px) {
     .container {
@@ -835,6 +866,11 @@ input {
     .key-metrics__list {
         grid-template-columns: repeat(4, 1fr);
         gap: var(--spacing-300);
+    }
+
+    .daily-forecast__list {
+        grid-template-columns: repeat(7, 1fr);
+        gap: var(--spacing-100);
     }
 }
 
